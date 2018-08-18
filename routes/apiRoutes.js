@@ -4,6 +4,7 @@ module.exports = function (app) {
 
   var userID = "";
 
+  /*
   // Get all users
   app.get("/api/users", function (req, res) {
     db.User.findAll({}).then(function (dbUsers) {
@@ -28,6 +29,7 @@ module.exports = function (app) {
       res.json(dbUser);
     });
   });
+  */
 
 
   app.post("/api/signup", function (req, res) {
@@ -118,7 +120,7 @@ module.exports = function (app) {
       });
   });
 
-  app.get("/api/post", function (req, res) {
+  app.get("/api/username/post", function (req, res) {
     db.Post.findAll({
       where: {
         UserId: userID

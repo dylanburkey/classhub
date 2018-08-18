@@ -6,22 +6,66 @@ var $userList = $("#user-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveUser: function(user) {
+  signUp: function(user) { //saveUser
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/users",
+      url: "api/signup",
       data: JSON.stringify(user)
     });
   },
-  getUsers: function() {
+  signIn: function() { //getUsers
     return $.ajax({
-      url: "api/users",
+      url: "api/signin/:email",
       type: "GET"
     });
   },
+  newMeta: function(user) { //saveUser
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/username/meta",
+      data: JSON.stringify(user)
+    });
+  },
+  updateMeta: function(user) { //saveUser
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "UPDATE",
+      url: "api/username/meta",
+      data: JSON.stringify(user)
+    });
+  },
+  getMeta: function() {
+    return $.ajax({
+      url: "api/username/meta",
+      type: "GET"
+    });
+  },
+  newPost: function(user) { //saveUser
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/username/post",
+      data: JSON.stringify(user)
+    });
+  },
+  getPost: function() {
+    return $.ajax({
+      url: "api/username/post",
+      type: "GET"
+    });
+  },
+
+
   deleteUser: function(id) {
     return $.ajax({
       url: "api/users/" + id,
