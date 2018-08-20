@@ -4,7 +4,6 @@ module.exports = function (app) {
 
   var userID = "";
 
-  /*
   // Get all users
   app.get("/api/users", function (req, res) {
     db.User.findAll({}).then(function (dbUsers) {
@@ -12,6 +11,14 @@ module.exports = function (app) {
     });
   });
 
+  // Get all posts
+  app.get("/api/posts", function (req, res) {
+    db.User.findAll({}).then(function (dbUsers) {
+      res.json(dbUsers);
+    });
+  });
+  
+  /*
   // Create a new User
   app.post("/api/users", function (req, res) {
     db.User.create(req.body).then(function (dbUser) {

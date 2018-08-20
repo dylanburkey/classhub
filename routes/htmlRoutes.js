@@ -37,8 +37,18 @@ module.exports = function (app) {
     });
   });
 
-  // Load index page
+  // Load posts page
   app.get("/posts", function (req, res) {
+    db.User.findAll({}).then(function (dbUsers) {
+      res.render("index", {
+        msg: "Welcome!",
+        users: dbUsers
+      });
+    });
+  });
+
+  // Load users page
+  app.get("/users", function (req, res) {
     db.User.findAll({}).then(function (dbUsers) {
       res.render("index", {
         msg: "Welcome!",

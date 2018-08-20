@@ -6,7 +6,7 @@ var $userList = $("#user-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  signUp: function(user) { //saveUser
+  saveUser: function(user) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -16,7 +16,7 @@ var API = {
       data: JSON.stringify(user)
     });
   },
-  signIn: function() { //getUsers
+  getUsers: function() {
     return $.ajax({
       url: "api/signin/:email",
       type: "GET"
@@ -84,14 +84,10 @@ var refreshUsers = function() {
 
       var $li = $("<li>")
         .attr({
-          class: "list-group-item",
+          class: "",
           "data-id": user.id
         })
         .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
 
       $li.append($button);
 
