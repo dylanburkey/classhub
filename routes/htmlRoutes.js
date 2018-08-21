@@ -1,6 +1,8 @@
 var db = require("../models");
+var passport = require ("passport");
+var LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
   // Load index page
   app.get("/", function (req, res) {
     db.User.findAll({}).then(function (dbUsers) {
@@ -23,13 +25,6 @@ module.exports = function (app) {
       });
     });
   });
-  
-  //after login 
-  app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: true })
-);
 
   // Load example page and pass in an example by id
   app.get("/login/:id", function (req, res) {
@@ -47,18 +42,42 @@ module.exports = function (app) {
   // Load posts page
   app.get("/posts", function (req, res) {
     db.User.findAll({}).then(function (dbUsers) {
-      res.render("index", {
-        msg: "Welcome!",
+      res.render("partials/content", {
         users: dbUsers
       });
     });
   });
 
+  app.get("/courses", function (req, res) {
+    db.User.findAll({}).then(function (dbUsers) {
+      res.render("index", {
+        msg: "Here are all the courses.",
+        users: dbUsers
+      });
+    });
+  });
+
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+      return next();
+
+  res.redirect('/signin');
+}
+
+
   // Load users page
   app.get("/users", function (req, res) {
     db.User.findAll({}).then(function (dbUsers) {
       res.render("index", {
-        msg: "Welcome!",
+        users: dbUsers
+      });
+    });
+  });
+
+  app.get("/contact", function (req, res) {
+    db.User.findAll({}).then(function (dbUsers) {
+      res.render("partials/contact", {
         users: dbUsers
       });
     });
