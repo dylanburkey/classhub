@@ -23,6 +23,13 @@ module.exports = function (app) {
       });
     });
   });
+  
+  //after login 
+  app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
 
   // Load example page and pass in an example by id
   app.get("/login/:id", function (req, res) {
